@@ -26,8 +26,7 @@ function reloadTableData(names) {
 }
 
 function updateTable(names) {
-    const $element = $('.data-table-wrapper');
-    const table = $element.find('table').first().DataTable();
+    const table = $('.data-table-wrapper').find('table').DataTable();
     let dataChanged = false;
     table.rows().every(function () {
         const oldNameData = this.data();
@@ -38,7 +37,7 @@ function updateTable(names) {
             dataChanged = true;
             this.data(newNameData);
         }
-        return true;
+       return true;
     });
 
     if (dataChanged) {
@@ -52,8 +51,13 @@ class Table extends Component {
         $(this.refs.main).DataTable({
             dom: '<"data-table-wrapper"t>',
             data: this.props.names,
-            columns
+            columns,
+            ordering: false
         });
+    }
+
+    componentWillUnmount(){
+       $('.data-table-wrapper').find('table').DataTable().destroy(true);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -64,6 +68,8 @@ class Table extends Component {
         }
         return false;
     }
+
+
 
     render() {
         return (
