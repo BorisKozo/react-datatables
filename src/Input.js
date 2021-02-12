@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
 class Input extends Component {
@@ -6,8 +6,10 @@ class Input extends Component {
     constructor() {
         super();
         this.state = {
-            name: '',
-            nickname: ''
+            id: '',
+            sysid: '',
+            isreturn: 0,
+            returnid: ''
         }
     }
 
@@ -18,28 +20,49 @@ class Input extends Component {
     }
 
     onAddClick() {
-        this.props.onAddClick(this.state.name, this.state.nickname);
+        console.log('onAddClick line 23')
+        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, parseInt(this.state.returnid, 10));
     }
 
     render() {
         return (
             <div className="app-input">
                 <div>
-                    <span>Name:</span>
+                    <span>Id:</span>
                     <input type="text" onChange={(e) => {
-                        this.updateValue('name', e.target.value)
+                        this.updateValue('id', e.target.value)
                     }} />
                 </div>
                 <div>
-                    <span>Nickname:</span>
+                    <span>SysId:</span>
                     <input type="text" onChange={(e) => {
-                        this.updateValue('nickname', e.target.value)
+                        this.updateValue('sysid', e.target.value)
+                    }} />
+                </div>
+                <div>
+                    <span>IsReturn?:</span>
+                    <select name="isreturn" id="isreturn" onChange={(e) => {
+                        console.log('drop down value change: ', e.target.value)
+                        this.updateValue('isreturn', e.target.value)
+                    }}>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div>
+                    <span>ReturnId:</span>
+                    <input type="text" onChange={(e) => {
+                        this.updateValue('returnid', e.target.value)
                     }} />
                 </div>
                 <button onClick={() => {
                     this.onAddClick()
                 }}>Add
                 </button>
+                <div>
+                    <span>Search Input:</span>
+                    <input type="text" id="searchInput" />
+                </div>
             </div>
         );
     }
