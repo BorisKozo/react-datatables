@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import firebase from 'firebase';
+import axios from 'axios'
 import Input from './Input';
 import Table from './Table';
-// var firebase = require('./firebase.js');
+// var MongoClient = require('mongodb').MongoClient;
 
 class App extends Component {
     constructor() {
@@ -13,77 +13,48 @@ class App extends Component {
             names: itemsList
         }
 
-        // var firebaseConfig = {
-        //     apiKey: "AIzaSyDXAqoHJUS1Y7eGsNZckyM_QtXECH0tEUI",
-        //     authDomain: "master-electricals.firebaseapp.com",
-        //     databaseURL: "https://master-electricals-default-rtdb.firebaseio.com",
-        //     projectId: "master-electricals",
-        //     storageBucket: "master-electricals.appspot.com",
-        //     messagingSenderId: "278786477211",
-        //     appId: "1:278786477211:web:9e0c787eecb35f9639ca3e",
-        //     measurementId: "G-1J46SDZWT9"
-        // };
-        
-        // firebase.initializeApp(firebaseConfig);
-
-        // // // Get a reference to the database service
-        // var database = firebase.database();
-
-        // console.log('database: ', database);
-
-        // database.ref.once('value')
-        //     .then(function (snapshot) {
-        //         console.log('snapshot.val()', snapshot.val())
-        //     })
+        // var apiUrl = 'https://master-electricals.herokuapp.com/api/items';
+        // fetch(apiUrl)
+        //     .then((response) => response.json())
+        //     .then((data) => console.log('This is your data', data));
     }
+}
 
-    componentDidMount() {
-        // // Get a reference to the database service
-        // var database = firebase.database();
-
-        // console.log('database: ', database);
-
-        // database.ref.once('value')
-        //     .then(function (snapshot) {
-        //         console.log('snapshot.val()', snapshot.val())
-        //     })
-    }
-
-    onAddClick(id, sysid, isreturn, returnid) {
-        console.log('onAddClick line 19')
-        let updated = false;
-        const result = this.state.names.map((nameData) => {
-            console.log('nameData.id: ', nameData.id, '=== id: ', id);
-            if (nameData.id === id) {
-                updated = true;
-                return { id, sysid, isreturn, returnid }
-            }
-            return nameData;
-        });
-        console.log('updated bool: ', updated)
-        if (!updated) {
-            result.push({ id, sysid, isreturn, returnid });
+onAddClick(id, sysid, isreturn, returnid) {
+    console.log('onAddClick line 19')
+    let updated = false;
+    const result = this.state.names.map((nameData) => {
+        console.log('nameData.id: ', nameData.id, '=== id: ', id);
+        if (nameData.id === id) {
+            updated = true;
+            return { id, sysid, isreturn, returnid }
         }
-
-        this.setState({
-            names: result
-        })
-
-        console.log('names result');
-        console.log('names: ', this.state.names);
-        console.log('result: ', result)
+        return nameData;
+    });
+    console.log('updated bool: ', updated)
+    if (!updated) {
+        result.push({ id, sysid, isreturn, returnid });
     }
 
-    render() {
-        return (
-            <div className="App">
-                <Input onAddClick={(id, sysid, isreturn, returnid) => {
-                    this.onAddClick(id, sysid, isreturn, returnid);
-                }} />
-                <Table names={this.state.names} />
-            </div>
-        );
-    }
+    this.setState({
+        names: result
+    })
+
+    console.log('names result');
+    console.log('names: ', this.state.names);
+    console.log('result: ', result)
+}
+
+render() {
+    return (
+        <div className="App">
+            <Input onAddClick={(id, sysid, isreturn, returnid) => {
+                this.onAddClick(id, sysid, isreturn, returnid);
+            }} />
+            <Table names={this.state.names} />
+        </div>
+    );
+}
 }
 
 export default App;
