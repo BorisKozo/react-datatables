@@ -9,11 +9,16 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "material-table": "^1.69.2",
     "mongodb": "^3.6.4",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react": "^17.0.1",
+    "react-data-table-component": "^7.0.0-alpha-5",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

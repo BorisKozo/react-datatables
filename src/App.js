@@ -59,10 +59,11 @@ class App extends Component {
         // }
     }
 
-    onAddClick =  function(id, sysid, isreturn, returnid) {
+    onAddClick =  function(id, sysid, isreturn, returnid, booktype) {
         console.log('onAddClick line 19')
         let updated = false;
 console.log('isreturn ' + isreturn);
+console.log('bookty[pe: ' +booktype);
         if(!id || !sysid)
         {
             alert("invalid id value");
@@ -77,6 +78,7 @@ console.log('isreturn ' + isreturn);
     //     .then(response => this.setState({ articleId: response.data.id }));
 
     const bookItem = {
+        booktype: booktype,
         bookid: id,
         sysid: sysid,
         return: isreturn,
@@ -125,8 +127,8 @@ console.log('isreturn ' + isreturn);
     render() {
         return (
             <div className="App">
-                <Input onAddClick={(id, sysid, isreturn, returnid) => {
-                    this.onAddClick(id, sysid, isreturn, returnid);
+                <Input onAddClick={(id, sysid, isreturn, returnid, type) => {
+                    this.onAddClick(id, sysid, isreturn, returnid, type);
                 }} />
                 <Table names={this.state.names} />
                <Search names={this.state.names} />

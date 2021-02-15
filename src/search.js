@@ -25,24 +25,48 @@ class Search extends Component {
         if(!this.state.fromValue || !this.state.toValue) {
             alert("Please neter valida value for search");
         }
-        var filteredRows = this.props.names.filter((item) => {
-            console.log('curent book id ' + item.bookid);
-            console.log('Is return ' + this.state.isReturn === 1);
-                console.log("output :" + (this.state.fromValue <= item.bookid && this.state.toValue >= item.bookid));
+        if(this.state.fromValue > this.state.toValue) {
+            alert("from value should be less than the to value");
+        }
+        console.log("IsReturn Value " + this.state.isReturn)
+        if(this.state.isReturn == 1)
+        {
+            var filteredRows = this.props.names.filter((item) => {
+                console.log('curent book id ' + item.bookid);
+                console.log('Is return ' + this.state.isReturn === 1);
+                    console.log("output :" + (this.state.fromValue <= item.bookid && this.state.toValue >= item.bookid));
+                return this.state.fromValue <= item.bookid && this.state.toValue >= item.bookid
+              
+            });
+            console.log("filtered rows : " + JSON.stringify(filteredRows))
+            this.setState({
+                filteredRecords: filteredRows
+            });
+        }
+        else{
+            var filteredRows = []
+            for(var i = this.state.fromValue; i<= this.state.toValue; i++)
+            {
+                var hasReturnRecord = this.props.names.filter((item) => {
+                    return item.bookid == i;
+                });
+                if(hasReturnRecord.length == 0)
+                {
+                filteredRows.push({
+                        bookid: i,
+                        sysid: '',
+                        return: 0,
+                        returnid:''
+                    })
+                }
+            }
 
-            if(this.state.isReturn === 1 )
-            {
-                                return this.state.fromValue <= item.bookid && this.state.toValue >= item.bookid
-            }
-            else
-            {
-                return !(this.state.fromValue <= item.bookid && this.state.toValue >= item.bookid)
-            }
-        });
-        console.log("filtered rows : " + JSON.stringify(filteredRows))
-        this.setState({
-            filteredRecords: filteredRows
-        });
+            this.setState({
+                filteredRecords: filteredRows
+            });
+        }
+        
+        
     }
 
     render() {
