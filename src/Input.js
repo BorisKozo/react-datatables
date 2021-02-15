@@ -41,7 +41,7 @@ class Input extends Component {
                 </div>
                 <div>
                     <span>IsReturn?:</span>
-                    <select name="isreturn" id="isreturn" onChange={(e) => {
+                    <select name="isreturn" id="isreturn" value={this.state.isreturn} onChange={(e) => {
                         console.log('drop down value change: ', e.target.value)
                         this.updateValue('isreturn', e.target.value)
                     }}>

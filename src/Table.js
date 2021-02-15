@@ -9,7 +9,7 @@ const columns = [
     {
         title: 'Id',
         width: 120,
-        data: 'id'
+        data: 'bookid'
     },
     {
         title: 'SysId',
@@ -45,6 +45,9 @@ function updateTable(names) {
         const newNameData = names.find((nameData) => {
             return nameData.id === oldNameData.id;
         });
+        console.log("Old Name: " +  JSON.stringify(oldNameData));
+        console.log("New Name: " + JSON.stringify(newNameData));
+        
         if (oldNameData.sysid !== newNameData.sysid) {
             dataChanged = true;
             this.data(newNameData);
@@ -60,6 +63,7 @@ function updateTable(names) {
         return true;
     });
 
+    console.log("data changed")
     if (dataChanged) {
         table.draw();
     }
