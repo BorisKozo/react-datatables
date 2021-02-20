@@ -35,67 +35,88 @@ class App extends Component {
     }
 
     onAddClick = function (id, sysid, isreturn, returnid, booktype) {
+        var bookItem;
+        console.log('onAddClick inside app.js');
+        console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype)
         let updated = false;
         console.log('isreturn ' + isreturn);
-        if (!id || !sysid) {
+        if (!id) {
             console.log("invalid id value");
+            return;
         }
-        if (isreturn && !returnid) {
-            alert("invalid return id value");
+        if (isreturn) {
+            bookItem = JSON.stringify({
+                booktype: booktype,
+                bookid: id,
+                sysid: sysid,
+                return: isreturn,
+                returnid: returnid
+            });
+        }
+        else{
+            bookItem = JSON.stringify({
+                booktype: booktype,
+                bookid: id,
+                sysid: sysid,
+                return: isreturn
+            });
         }
 
-        const bookItem = {
-            booktype: booktype,
-            bookid: id,
-            sysid: sysid,
-            return: isreturn,
-            returnid: returnid
-        };
+        console.log('bookitem value: ', bookItem)
 
-        // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        console.log('bookItem value - JSON stringify: ', JSON.stringify(bookItem));
+
+        const result = this.state.names.map((nameData) => {
+            console.log('nameData.id: ', nameData.id, '=== id: ', id);
+            if (nameData.bookid === id) {
+                updated = true;
+                return bookItem;
+            }
+            return nameData;
+        });
+        console.log('updated bool: ', updated)
+        if (!updated) {
+            result.push(JSON.stringify(bookItem));
+        }
+
+        console.log('result: ', JSON.stringify(result));
+
+        this.setState({
+            names: result
+        })
+
+
+
+        axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-            }, responseType: 'json', credentials: 'same-origin',
+            }
+            , responseType: 'json', credentials: 'same-origin',
         }).then(res => {
 
-            console.log('Saved successfully');
+            console.log('res: ', res);
+            console.log('Saved successfully in post access');
             console.log(bookItem);
 
-            const result = this.state.names.map((nameData) => {
-                console.log('nameData.id: ', nameData.id, '=== id: ', id);
-                if (nameData.bookid === id) {
-                    updated = true;
-                    return bookItem;
-                }
-                return nameData;
-            });
-            console.log('updated bool: ', updated)
-            if (!updated) {
-                result.push(bookItem);
-            }
 
-            console.log('result: ', JSON.stringify(result));
-
-            this.setState({
-                names: result
-            })
         }).catch(function (error) {
+            console.log('error in post')
             if (error.response) {
-                // Request made and server responded
+                console.log('error in post - Request made and server responded')// Request made and server responded
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
             } else if (error.request) {
-                // The request was made but no response was received
+                console.log('error in post - The request was made but no response was received')// The request was made but no response was received
                 console.log(error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
+                console.log('error in post - Something happened in setting up the request that triggered an Error')// Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
             }
 
-        });;
+        });
     }
 
     render() {

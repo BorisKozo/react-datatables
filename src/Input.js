@@ -21,7 +21,9 @@ class Input extends Component {
         })
     }
 
-    onAddClick() {
+    onAddClick(e) {
+        e.preventDefault();
+        console.log('this.onAddClick method call inside');
         this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, parseInt(this.state.returnid, 10), this.state.booktype);
     }
 
@@ -33,7 +35,7 @@ class Input extends Component {
                         Master Electricals<Badge variant="secondary"></Badge>
                     </h1>
                 </div>
-                <div>
+                {/* <div>
                     <span>Book Type :</span>
                     <select name="bookType" id="bookType" value={this.state.booktype} onChange={(e) => {
                         console.log('drop down value change: ', e.target.value)
@@ -102,7 +104,7 @@ class Input extends Component {
                 <div>
                     <span>Search Input:</span>
                     <input type="text" id="searchInput" />
-                </div>
+                </div> */}
 
                 <div>
                     <Container>
@@ -110,7 +112,10 @@ class Input extends Component {
                             <Form>
                                 <Form.Group controlId="formBookType">
                                     <Form.Label>Book Type</Form.Label>
-                                    <Form.Control as="select">
+                                    <Form.Control as="select" onChange={(e) => {
+                                        console.log('booktype select value change: ', e.target.value)
+                                        this.updateValue('booktype', e.target.value)
+                                    }}>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -142,26 +147,39 @@ class Input extends Component {
                                 <Form.Group controlId="formBookId">
                                     <Form.Label>Book Id</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Book Id" onChange={(e) => {
+                                        console.log('bookid value change: ', e.target.value)
                                         this.updateValue('id', e.target.value)
                                     }} />
                                 </Form.Group>
                                 <Form.Group controlId="formSysId">
-                                    <Form.Label>Sys Type</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter Sys Type" />
+                                    <Form.Label>Sys Id</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Sys Id" onChange={(e) => {
+                                        console.log('sysid value change: ', e.target.value)
+                                        this.updateValue('sysid', e.target.value)
+                                    }} />
                                 </Form.Group>
                                 <Form.Group controlId="formIsReturn">
                                     <Form.Label>Is Return?</Form.Label>
-                                    <Form.Control as="select">
+                                    <Form.Control as="select" onChange={(e) => {
+                                        console.log('is return value change: ', e.target.value)
+                                        this.updateValue('isreturn', e.target.value)
+                                    }}>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group controlId="formReturnId">
                                     <Form.Label>Return Id</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter Return Id" />
+                                    <Form.Control type="text" placeholder="Enter Return Id" onChange={(e) => {
+                                        console.log('returnid value change: ', e.target.value)
+                                        this.updateValue('returnid', e.target.value)
+                                    }} />
                                 </Form.Group>
 
-                                <Button variant="primary" type="submit">Add</Button>
+                                <Button variant="primary" type="submit" onClick={(e) => {
+                                    console.log('button click: ')
+                                    this.onAddClick(e)
+                                }}>Add</Button>
                             </Form>
                         </Row>
                     </Container>
