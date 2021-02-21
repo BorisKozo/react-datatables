@@ -40,6 +40,8 @@ class Table extends Component {
                     responsive={true}
                     defaultSortField={"Book Type"}
                     defaultSortAsc={false}
+                    pagination={true}
+                    paginationPerPage={2}
                 />
             </div>);
     }

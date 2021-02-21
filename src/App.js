@@ -86,6 +86,8 @@ class App extends Component {
         })
 
 
+        console.log('this.state.names: ', this.state.names);
+
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {

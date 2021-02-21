@@ -2,24 +2,11 @@ import React, { Component } from 'react';
 import DataTable from 'react-data-table-component';
 
 const columns = [
-    {
-       name: 'Book Id',
-       selector: 'bookid',
-       sortable: true
-   },
-   {
-       name: 'Sys Id',
-       selector: 'sysid'
-   },
-   {
-       name: 'Is Return',
-       selector: 'isreturn'
-   },
-   {
-       name: 'Return Id',
-       selector: 'returnid'
-   }
-   ];
+  {
+    name: 'Book Id',
+    selector: 'bookid',
+    sortable: true
+  }];
 
 class SearchTable extends Component {
   render() {
@@ -28,6 +15,12 @@ class SearchTable extends Component {
         title="Filtered Info"
         columns={columns}
         data={this.props.names}
+        striped={true}
+        highlightOnHover={true}
+        responsive={true}
+        defaultSortField={"Book Id"}
+        defaultSortAsc={false}
+        center={true}
       />
     )
   }

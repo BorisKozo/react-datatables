@@ -33,3 +33,11 @@ body {
 .data-table-wrapper tr {
     border-bottom: 1px solid black;
 }
+
+.displayBlock{
+    display: block;
+}
+
+.displayNone{
+    display: none;
+}
