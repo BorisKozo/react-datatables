@@ -27,7 +27,7 @@ class Input extends Component {
     onAddClick(e) {
         e.preventDefault();
         console.log('this.onAddClick method call inside');
-        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, parseInt(this.state.returnid, 10), this.state.booktype);
+        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : parseInt(this.state.returnid, 10), this.state.booktype);
     }
 
     render() {
@@ -41,7 +41,7 @@ class Input extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Form>
+                            <Form className="alignCenter">
                                 <Form.Group controlId="formAdminPin" className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Admin PIN</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Admin PIN" onChange={(e) => {
@@ -51,17 +51,18 @@ class Input extends Component {
                                     }} />
                                 </Form.Group>
 
-                                <Button className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="primary" type="submit" onClick={(e) => {
-                                    e.preventDefault();
-                                    console.log('button click: ')
-                                    console.log('this.state.loginValidate: ', this.state.loginValidate)
-                                    var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('9524444849', 10) ? true : false;
-                                    console.log('loginCheck: ', loginCheck);
-                                    this.setState({loginValidate : loginCheck});
-                                    loginCheck ? alert('Login Success') : alert('Wrong Admin PIN. Login Failure')
-                                    console.log('this.state.loginvalidate: ', this.state.loginValidate)
-                                }}>Login</Button>
-
+                                <Form.Group controlId="formButtonLogin">
+                                    <Button className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
+                                        e.preventDefault();
+                                        console.log('button click: ')
+                                        console.log('this.state.loginValidate: ', this.state.loginValidate)
+                                        var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('9524444849', 10) ? true : false;
+                                        console.log('loginCheck: ', loginCheck);
+                                        this.setState({ loginValidate: loginCheck });
+                                        loginCheck ? alert('Login Success') : alert('Wrong Admin PIN. Login Failure')
+                                        console.log('this.state.loginvalidate: ', this.state.loginValidate)
+                                    }}>Login</Button>
+                                </Form.Group>
 
                                 <Form.Group controlId="formBookType" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Book Type</Form.Label>
@@ -129,8 +130,9 @@ class Input extends Component {
                                     }} />
                                 </Form.Group>
 
-                                <Button className={this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="primary" type="submit" onClick={(e) => {
-                                    console.log('button click: ')
+                                <Button className={this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log('loginValidate button click')
                                     this.onAddClick(e)
                                 }}>Add</Button>
                             </Form>

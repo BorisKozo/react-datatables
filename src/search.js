@@ -141,7 +141,7 @@ class Search extends Component {
                                             this.updateValue('toValue', e.target.value)
                                         }} />
                                     </Form.Group>
-                                    <Button variant="primary" type="submit" onClick={(e) => {
+                                    <Button variant="success" type="submit" onClick={(e) => {
                                         this.onApplySearch(e)
                                     }}>Search</Button>
                                 </Form>

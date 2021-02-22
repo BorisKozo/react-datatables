@@ -38,10 +38,10 @@ class Table extends Component {
                     striped={true}
                     highlightOnHover={true}
                     responsive={true}
-                    defaultSortField={"Book Type"}
-                    defaultSortAsc={false}
+                    defaultSortField={"Book Id"}
+                    defaultSortAsc={true}
                     pagination={true}
-                    paginationPerPage={2}
+                    paginationPerPage={50}
                 />
             </div>);
     }
