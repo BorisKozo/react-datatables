@@ -33,3 +33,20 @@ body {
 .data-table-wrapper tr {
     border-bottom: 1px solid black;
 }
+
+.displayBlock {
+    display: block;
+}
+
+.displayNone {
+    display: none;
+}
+
+.alignRight {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.alignCenter {
+    text-align: center;
+}

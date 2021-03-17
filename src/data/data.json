@@ -1,0 +1,59 @@
+{
+    "A": [
+        {
+            "id": 1,
+            "sysid": 14626,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 2,
+            "sysid": 14627,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 3,
+            "sysid": 14623,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 4,
+            "sysid": 14625,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 5,
+            "sysid": 14635,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 6,
+            "sysid": 14628,
+            "return": false,
+            "returnid": "",
+            "value": "A-6-14628-1-6389"
+        },
+        {
+            "id": 7,
+            "sysid": 14629,
+            "return": false,
+            "returnid": ""
+        },
+        {
+            "id": 9,
+            "sysid": 14663,
+            "return": true,
+            "returnid": 1522
+        },
+        {
+            "id": 69,
+            "sysid": 14696,
+            "return": true,
+            "returnid": "1532"
+        }
+    ]
+}
